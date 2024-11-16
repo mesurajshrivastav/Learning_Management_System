@@ -21,6 +21,8 @@ mongoose
   .then(() => console.log("MongoDB is connected"))
   .catch((e) => console.log("MongoDB Connection Error", e));
 
+// routes configuration
+
 
 // optional catching global error
 app.use((err, req, res, next) => {
