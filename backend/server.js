@@ -2,17 +2,19 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const authRoutes = require('./routes/auth-routes/index.js');
+const authRoutes = require("./routes/auth-routes/index.js");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 const MONOG_URI = process.env.MONGO_URI;
 
-cors({
-  origin: process.env.CLIENT_URL,
-  methods: ["GET", "POST", "DELETE", "PUT"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-});
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(express.json());
 
@@ -23,8 +25,7 @@ mongoose
   .catch((e) => console.log("MongoDB Connection Error", e));
 
 // routes configuration
-app.use('/auth',authRoutes);
-
+app.use("/auth", authRoutes);
 
 // optional catching global error
 app.use((err, req, res, next) => {
